@@ -25,6 +25,7 @@ il_ins::il_ins(): Node("il_ins"){
     publishers4 = this->create_publisher<inertiallabs_msgs::msg::MarineData>("/Inertial_Labs/marine_data",1);
     // publishers6 = this->create_publisher<TODO>("/imu_raw",1)
 }
+il_ins::~il_ins(){}
 
 void publish_device(IL::INSDataStruct *data, il_ins* contextPtr)
 {

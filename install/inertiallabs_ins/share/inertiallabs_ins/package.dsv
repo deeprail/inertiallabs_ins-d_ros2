@@ -1,3 +1,6 @@
+source;share/inertiallabs_ins/hook/cmake_prefix_path.ps1
+source;share/inertiallabs_ins/hook/cmake_prefix_path.dsv
+source;share/inertiallabs_ins/hook/cmake_prefix_path.sh
 source;share/inertiallabs_ins/local_setup.bash
 source;share/inertiallabs_ins/local_setup.dsv
 source;share/inertiallabs_ins/local_setup.ps1
