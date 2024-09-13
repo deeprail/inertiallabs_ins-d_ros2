@@ -1,6 +1,0 @@
-Invoking command in '/home/ycao/ins2_ws/build/inertiallabs_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ycao/ins2_ws/src/inertiallabs_msgs -DCMAKE_INSTALL_PREFIX=/home/ycao/ins2_ws/install/inertiallabs_msgs
-Invoked command in '/home/ycao/ins2_ws/build/inertiallabs_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ycao/ins2_ws/src/inertiallabs_msgs -DCMAKE_INSTALL_PREFIX=/home/ycao/ins2_ws/install/inertiallabs_msgs
-Invoking command in '/home/ycao/ins2_ws/build/inertiallabs_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ycao/ins2_ws/build/inertiallabs_msgs -- -j32 -l32
-Invoked command in '/home/ycao/ins2_ws/build/inertiallabs_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ycao/ins2_ws/build/inertiallabs_msgs -- -j32 -l32
-Invoking command in '/home/ycao/ins2_ws/build/inertiallabs_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ycao/ins2_ws/build/inertiallabs_msgs
-Invoked command in '/home/ycao/ins2_ws/build/inertiallabs_msgs' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ycao/ins2_ws/build/inertiallabs_msgs
