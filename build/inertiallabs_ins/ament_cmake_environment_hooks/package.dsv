@@ -1,0 +1,4 @@
+source;share/inertiallabs_ins/local_setup.bash
+source;share/inertiallabs_ins/local_setup.dsv
+source;share/inertiallabs_ins/local_setup.sh
+source;share/inertiallabs_ins/local_setup.zsh

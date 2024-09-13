@@ -1,0 +1,10 @@
+{
+  "package_name": "inertiallabs_msgs",
+  "non_idl_tuples": [
+    "/home/ycao/ins2_ws/src/inertiallabs_msgs:msg/InsData.msg",
+    "/home/ycao/ins2_ws/src/inertiallabs_msgs:msg/SensorData.msg",
+    "/home/ycao/ins2_ws/src/inertiallabs_msgs:msg/GnssData.msg",
+    "/home/ycao/ins2_ws/src/inertiallabs_msgs:msg/GpsData.msg",
+    "/home/ycao/ins2_ws/src/inertiallabs_msgs:msg/MarineData.msg"
+  ]
+}

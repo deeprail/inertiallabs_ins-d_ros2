@@ -1,29 +1,51 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.10)
 project(inertiallabs_msgs)
 
-find_package(catkin REQUIRED COMPONENTS std_msgs geometry_msgs actionlib_msgs message_generation)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-add_message_files(
-  DIRECTORY msg
-  FILES
-  ins_data.msg
-  sensor_data.msg
-  gnss_data.msg
-  gps_data.msg
-  marine_data.msg
+# find dependencies
+find_package(ament_cmake REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(actionlib_msgs REQUIRED)
+
+
+# 生成自定义消息
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/InsData.msg"
+  "msg/SensorData.msg"
+  "msg/GnssData.msg"
+  "msg/GpsData.msg"
+  "msg/MarineData.msg"
+  DEPENDENCIES std_msgs geometry_msgs
 )
 
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  geometry_msgs
-  actionlib_msgs
+# 安装步骤
+install(DIRECTORY include/
+  DESTINATION include
 )
 
-catkin_package(
-#  INCLUDE_DIRS include
-  CATKIN_DEPENDS geometry_msgs std_msgs actionlib_msgs message_runtime)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
+  # the following line skips cpplint (only works in a git repo)
+  # comment the line when this package is in a git repo and when
+  # a copyright and license is added to all source files
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-#install(DIRECTORY include/inertiallabs_msgs/
-#  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#  PATTERN "*.h")
+
+
+ament_package()

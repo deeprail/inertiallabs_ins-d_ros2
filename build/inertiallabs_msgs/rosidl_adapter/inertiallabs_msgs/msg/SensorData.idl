@@ -1,0 +1,28 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from inertiallabs_msgs/msg/SensorData.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Vector3.idl"
+#include "std_msgs/msg/Header.idl"
+
+module inertiallabs_msgs {
+  module msg {
+    struct SensorData {
+      std_msgs::msg::Header header;
+
+      geometry_msgs::msg::Vector3 mag;
+
+      geometry_msgs::msg::Vector3 accel;
+
+      geometry_msgs::msg::Vector3 gyro;
+
+      float temp;
+
+      float vinp;
+
+      float pressure;
+
+      float barometric_height;
+    };
+  };
+};

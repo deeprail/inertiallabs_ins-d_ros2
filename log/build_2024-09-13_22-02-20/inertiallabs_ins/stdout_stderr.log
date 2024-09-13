@@ -1,0 +1,130 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+-- Found FastRTPS: /opt/ros/humble/include  
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found tf2: 0.25.7 (/opt/ros/humble/share/tf2/cmake)
+-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+-- Found inertiallabs_msgs: 0.0.0 (/home/ycao/ins2_ws/install/inertiallabs_msgs/share/inertiallabs_msgs/cmake)
+-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/ycao/ins2_ws/src/inertiallabs_ins/include;/home/ycao/ins2_ws/src/inertiallabs_ins/../inertiallabs_sdk;/home/ycao/ins2_ws/src/inertiallabs_ins/./include/inertiallabs_ins
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ycao/ins2_ws/build/inertiallabs_ins
+gmake[1]: Entering directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[2]: Entering directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[3]: Entering directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[3]: Leaving directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[3]: Entering directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+[ 16%] [32mBuilding CXX object CMakeFiles/il_ins.dir/src/il_ins.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/il_ins.dir/home/ycao/ins2_ws/src/inertiallabs_sdk/ILDriver.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/il_ins.dir/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/il_ins.dir/home/ycao/ins2_ws/src/inertiallabs_sdk/platforms/linux/NetClient.cpp.o[0m
+[ 83%] [32mBuilding CXX object CMakeFiles/il_ins.dir/home/ycao/ins2_ws/src/inertiallabs_sdk/platforms/linux/SerialPort.cpp.o[0m
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:[m[K In member function ‘[01m[Kvoid IL::UDDParser::writeHeader()[m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:113:35:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::__cxx11::basic_string<char>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  113 |                 for (int i = 0; [01;35m[Ki < dataSet.size()[m[K; ++i)
+      |                                 [01;35m[K~~^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:347:31:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::__cxx11::basic_string<char>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  347 |                         if ([01;35m[Ki < dataSet.size() - 1[m[K)
+      |                             [01;35m[K~~^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:[m[K In member function ‘[01m[Kvoid IL::UDDParser::writeTxtAndData()[m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:361:35:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::__cxx11::basic_string<char>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  361 |                 for (int i = 0; [01;35m[Ki < dataSet.size()[m[K; ++i)
+      |                                 [01;35m[K~~^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:757:31:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::__cxx11::basic_string<char>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+  757 |                         if ([01;35m[Ki < dataSet.size() - 1[m[K)
+      |                             [01;35m[K~~^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:356:25:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KIMRdataPresent[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  356 |                 uint8_t [01;35m[KIMRdataPresent[m[K = 0;
+      |                         [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:357:22:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KGPSTimePresent[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  357 |                 bool [01;35m[KGPSTimePresent[m[K = false;
+      |                      [01;35m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:358:24:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KUTCTOD[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  358 |                 double [01;35m[KUTCTOD[m[K = 0;                      // UTC Time of Day
+      |                        [01;35m[K^~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:359:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KUTCDOW[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  359 |                 uint32_t [01;35m[KUTCDOW[m[K = 0;            // Day of Week computed from UTC date;
+      |                          [01;35m[K^~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:360:28:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KstartOfMonthDaysToAdd[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  360 |                 static int [01;35m[KstartOfMonthDaysToAdd[m[K[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };    // To compute day of week
+      |                            [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:1[m[K:
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = unsigned int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:366:42:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+   68 |                         parseError = [01;35m[K(payloadLen - payloadInd < sizeof(val))[m[K;
+      |                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~[m[K
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = long unsigned int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:369:48:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = unsigned char][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:375:43:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = short unsigned int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:378:46:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = short int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:385:40:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:390:40:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = long int][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:403:43:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h: In instantiation of ‘[01m[Kdouble IL::UDDParser::readScaled(double, bool, int) [with T = signed char][m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:467:45:[m[K   required from here
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.h:68:63:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Klong unsigned int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:[m[K At global scope:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/UDDParser.cpp:360:28:[m[K [01;35m[Kwarning: [m[K‘[01m[KstartOfMonthDaysToAdd[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  360 |                 static int [01;35m[KstartOfMonthDaysToAdd[m[K[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };    // To compute day of week
+      |                            [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/ILDriver.cpp:[m[K In member function ‘[01m[Kvoid IL::Driver::readerLoop()[m[K’:
+[01m[K/home/ycao/ins2_ws/src/inertiallabs_sdk/ILDriver.cpp:227:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Klen[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  227 |                 uint16_t [01;35m[Klen[m[K = 0;
+      |                          [01;35m[K^~~[m[K
+[100%] [32m[1mLinking CXX executable il_ins[0m
+/usr/bin/ld: CMakeFiles/il_ins.dir/src/il_ins.cpp.o: warning: relocation against `_ZTV6il_ins' in read-only section `.text'
+/usr/bin/ld: CMakeFiles/il_ins.dir/src/il_ins.cpp.o: in function `il_ins::il_ins()':
+il_ins.cpp:(.text+0xf5): undefined reference to `vtable for il_ins'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+collect2: error: ld returned 1 exit status
+gmake[3]: *** [CMakeFiles/il_ins.dir/build.make:240: il_ins] Error 1
+gmake[3]: Leaving directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[2]: *** [CMakeFiles/Makefile2:137: CMakeFiles/il_ins.dir/all] Error 2
+gmake[1]: *** [Makefile:146: all] Error 2
+gmake[2]: Leaving directory '/home/ycao/ins2_ws/build/inertiallabs_ins'
+gmake[1]: Leaving directory '/home/ycao/ins2_ws/build/inertiallabs_ins'

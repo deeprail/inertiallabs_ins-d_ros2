@@ -1,0 +1,48 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from inertiallabs_msgs/msg/GnssData.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Vector3.idl"
+#include "std_msgs/msg/Header.idl"
+
+module inertiallabs_msgs {
+  module msg {
+    struct GnssData {
+      std_msgs::msg::Header header;
+
+      int8 gnss_info_1;
+
+      int8 gnss_info_2;
+
+      int8 number_sat;
+
+      float gnss_velocity_latency;
+
+      int8 gnss_angles_position_type;
+
+      float gnss_heading;
+
+      float gnss_pitch;
+
+      float gnss_gdop;
+
+      float gnss_pdop;
+
+      float gnss_hdop;
+
+      float gnss_vdop;
+
+      float gnss_tdop;
+
+      uint8 new_gnss_flags;
+
+      double diff_age;
+
+      geometry_msgs::msg::Vector3 pos_std;
+
+      float heading_std;
+
+      float pitch_std;
+    };
+  };
+};

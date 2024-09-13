@@ -2,178 +2,164 @@
 #include<unistd.h>
 #include<math.h>
 #include<stdlib.h>
-#include<rclcpp/rclcpp.h>
+
+#include "rclcpp/rclcpp.hpp"
 
 //Inertial Labs source header
 #include "ILDriver.h"
 
 //adding message type headers
-#include <inertiallabs_msgs/sensor_data.h>
-#include <inertiallabs_msgs/ins_data.h>
-#include <inertiallabs_msgs/gps_data.h>
-#include <inertiallabs_msgs/gnss_data.h>
-#include <inertiallabs_msgs/marine_data.h>
+#include "inertiallabs_msgs/msg/sensor_data.hpp"
+#include "inertiallabs_msgs/msg/ins_data.hpp"
+#include "inertiallabs_msgs/msg/gps_data.hpp"
+#include "inertiallabs_msgs/msg/gnss_data.hpp"
+#include "inertiallabs_msgs/msg/marine_data.hpp"
 
-//Publishers
+#include "ilins.h"
 
-struct Context {
-	ros::Publisher publishers[5];
-	std::string imu_frame_id;
-};
+il_ins::il_ins(): Node("il_ins"){ 
+	publishers0 = this->create_publisher<inertiallabs_msgs::msg::SensorData>("/Inertial_Labs/sensor_data",1);
+    publishers1 = this->create_publisher<inertiallabs_msgs::msg::InsData>("/Inertial_Labs/ins_data",1);
+    publishers2 = this->create_publisher<inertiallabs_msgs::msg::GpsData>("/Inertial_Labs/gps_data",1);
+    publishers3 = this->create_publisher<inertiallabs_msgs::msg::GnssData>("/Inertial_Labs/gnss_data",1);
+    publishers4 = this->create_publisher<inertiallabs_msgs::msg::MarineData>("/Inertial_Labs/marine_data",1);
+    // publishers6 = this->create_publisher<TODO>("/imu_raw",1)
+}
 
-void publish_device(IL::INSDataStruct *data, void* contextPtr)
+void publish_device(IL::INSDataStruct *data, il_ins* contextPtr)
 {
-	Context * context = reinterpret_cast<Context*>(contextPtr);
+	il_ins * context = reinterpret_cast<il_ins*>(contextPtr);
 	static int seq=0;
 	seq++;
 
-	inertiallabs_msgs::sensor_data msg_sensor_data;
-	inertiallabs_msgs::ins_data msg_ins_data;
-	inertiallabs_msgs::gps_data msg_gps_data;
-	inertiallabs_msgs::gnss_data msg_gnss_data;
-	inertiallabs_msgs::marine_data msg_marine_data;
+	inertiallabs_msgs::msg::SensorData_<std::allocator<void>> msg_sensor_data;
+	inertiallabs_msgs::msg::InsData_<std::allocator<void>> msg_ins_data;
+	inertiallabs_msgs::msg::GpsData_<std::allocator<void>> msg_gps_data;
+	inertiallabs_msgs::msg::GnssData_<std::allocator<void>> msg_gnss_data;
+	inertiallabs_msgs::msg::MarineData_<std::allocator<void>> msg_marine_data;
 
-	ros::Time timestamp = ros::Time::now();
+	rclcpp::Time timestamp = context->now();
 
-	if (context->publishers[0].getNumSubscribers() > 0)
+	if (context->publishers0->get_subscription_count() > 0)
 	{
-		msg_sensor_data.header.seq = seq;
 		msg_sensor_data.header.stamp = timestamp;
 		msg_sensor_data.header.frame_id = context->imu_frame_id;
-		msg_sensor_data.Mag.x = data->Mag[0];
-		msg_sensor_data.Mag.y = data->Mag[0];
-		msg_sensor_data.Mag.z = data->Mag[0];
-		msg_sensor_data.Accel.x = data->Acc[0];
-		msg_sensor_data.Accel.y = data->Acc[1];
-		msg_sensor_data.Accel.z = data->Acc[2];
-		msg_sensor_data.Gyro.x = data->Gyro[0];
-		msg_sensor_data.Gyro.y = data->Gyro[1];
-		msg_sensor_data.Gyro.z = data->Gyro[2];
-		msg_sensor_data.Temp = data->Temp;
-		msg_sensor_data.Vinp = data->VSup;
-		msg_sensor_data.Pressure = data->hBar;
-		msg_sensor_data.Barometric_Height = data->pBar;
-		context->publishers[0].publish(msg_sensor_data);
+		msg_sensor_data.mag.x = data->Mag[0];
+		msg_sensor_data.mag.y = data->Mag[0];
+		msg_sensor_data.mag.z = data->Mag[0];
+		msg_sensor_data.accel.x = data->Acc[0];
+		msg_sensor_data.accel.y = data->Acc[1];
+		msg_sensor_data.accel.z = data->Acc[2];
+		msg_sensor_data.gyro.x = data->Gyro[0];
+		msg_sensor_data.gyro.y = data->Gyro[1];
+		msg_sensor_data.gyro.z = data->Gyro[2];
+		msg_sensor_data.temp = data->Temp;
+		msg_sensor_data.vinp = data->VSup;
+		msg_sensor_data.pressure = data->hBar;
+		msg_sensor_data.barometric_height = data->pBar;
+		context->publishers0->publish(msg_sensor_data);
 	}
 
-	if (context->publishers[1].getNumSubscribers() > 0)
+	if (context->publishers1->get_subscription_count() > 0)
 	{
-		msg_ins_data.header.seq = seq;
 		msg_ins_data.header.stamp = timestamp;
 		msg_ins_data.header.frame_id = context->imu_frame_id;
-		msg_ins_data.YPR.x = data->Heading;
-		msg_ins_data.YPR.y = data->Pitch;
-		msg_ins_data.YPR.z = data->Roll;
-		msg_ins_data.OriQuat.w = data->Quat[0];
-		msg_ins_data.OriQuat.x = data->Quat[1];
-		msg_ins_data.OriQuat.y = data->Quat[2];
-		msg_ins_data.OriQuat.z = data->Quat[3];
-		msg_ins_data.LLH.x = data->Latitude;
-		msg_ins_data.LLH.y = data->Longitude;
-		msg_ins_data.LLH.z = data->Altitude;
-		msg_ins_data.Vel_ENU.x = data->VelENU[0];
-		msg_ins_data.Vel_ENU.y = data->VelENU[1];
-		msg_ins_data.Vel_ENU.z = data->VelENU[2];
-		msg_ins_data.GPS_INS_Time = data->GPS_INS_Time;
-		msg_ins_data.GPS_IMU_Time = data->GPS_IMU_Time;
-		msg_ins_data.GPS_mSOW.data = data->ms_gps;
-		msg_ins_data.Solution_Status.data = data->INSSolStatus;
-		msg_ins_data.USW = data->USW;
-		msg_ins_data.Pos_STD.x = data->KFLatStd;
-		msg_ins_data.Pos_STD.y = data->KFLonStd;
-		msg_ins_data.Pos_STD.z = data->KFAltStd;
-		msg_ins_data.Heading_STD = data->KFHdgStd;
-		context->publishers[1].publish(msg_ins_data);
+		msg_ins_data.ypr.x = data->Heading;
+		msg_ins_data.ypr.y = data->Pitch;
+		msg_ins_data.ypr.z = data->Roll;
+		msg_ins_data.oriquat.w = data->Quat[0];
+		msg_ins_data.oriquat.x = data->Quat[1];
+		msg_ins_data.oriquat.y = data->Quat[2];
+		msg_ins_data.oriquat.z = data->Quat[3];
+		msg_ins_data.llh.x = data->Latitude;
+		msg_ins_data.llh.y = data->Longitude;
+		msg_ins_data.llh.z = data->Altitude;
+		msg_ins_data.vel_enu.x = data->VelENU[0];
+		msg_ins_data.vel_enu.y = data->VelENU[1];
+		msg_ins_data.vel_enu.z = data->VelENU[2];
+		msg_ins_data.gps_ins_time = data->GPS_INS_Time;
+		msg_ins_data.gps_imu_time = data->GPS_IMU_Time;
+		msg_ins_data.gps_msow.data = data->ms_gps;
+		msg_ins_data.solution_status.data = data->INSSolStatus;
+		msg_ins_data.usw = data->USW;
+		msg_ins_data.pos_std.x = data->KFLatStd;
+		msg_ins_data.pos_std.y = data->KFLonStd;
+		msg_ins_data.pos_std.z = data->KFAltStd;
+		msg_ins_data.heading_std = data->KFHdgStd;
+		context->publishers1->publish(msg_ins_data);
 	}
 
-	if (context->publishers[2].getNumSubscribers() > 0)
+	if (context->publishers2->get_subscription_count() > 0)
 	{
-		msg_gps_data.header.seq = seq;
 		msg_gps_data.header.stamp = timestamp;
 		msg_gps_data.header.frame_id = context->imu_frame_id;
-		msg_gps_data.LLH.x = data->LatGNSS;
-		msg_gps_data.LLH.y = data->LonGNSS;
-		msg_gps_data.LLH.z = data->AltGNSS;
-		msg_gps_data.HorSpeed = data->V_Hor;
-		msg_gps_data.SpeedDir = data->Trk_gnd;
-		msg_gps_data.VerSpeed = data->V_ver;
-		context->publishers[2].publish(msg_gps_data);
+		msg_gps_data.llh.x = data->LatGNSS;
+		msg_gps_data.llh.y = data->LonGNSS;
+		msg_gps_data.llh.z = data->AltGNSS;
+		msg_gps_data.horspeed = data->V_Hor;
+		msg_gps_data.speeddir = data->Trk_gnd;
+		msg_gps_data.verspeed = data->V_ver;
+		context->publishers2->publish(msg_gps_data);
 	}
 
-	if (context->publishers[3].getNumSubscribers() > 0)
+	if (context->publishers3->get_subscription_count() > 0)
 	{
-		msg_gnss_data.header.seq = seq;
 		msg_gnss_data.header.stamp = timestamp;
 		msg_gnss_data.header.frame_id = context->imu_frame_id;
-		msg_gnss_data.GNSS_info_1 = data->GNSSInfo1;
-		msg_gnss_data.GNSS_info_2 = data->GNSSInfo2;
-		msg_gnss_data.Number_Sat = data->SVsol;
-		msg_gnss_data.GNSS_Velocity_Latency = data->GNSSVelLatency;
-		msg_gnss_data.GNSS_Angles_Position_Type = data->AnglesType;
-		msg_gnss_data.GNSS_Heading = data->Heading_GNSS;
-		msg_gnss_data.GNSS_Pitch = data->Pitch_GNSS;
-		msg_gnss_data.GNSS_GDOP = data->GDOP;
-		msg_gnss_data.GNSS_PDOP = data->PDOP;
-		msg_gnss_data.GNSS_HDOP = data->HDOP;
-		msg_gnss_data.GNSS_VDOP = data->VDOP;
-		msg_gnss_data.GNSS_TDOP = data->TDOP;
-		msg_gnss_data.New_GNSS_Flags = data->NewGPS;
-		msg_gnss_data.Diff_Age = data->DiffAge;
-		msg_gnss_data.Pos_STD.x = data->LatGNSSStd;
-		msg_gnss_data.Pos_STD.y = data->LonGNSSStd;
-		msg_gnss_data.Pos_STD.z = data->AltGNSSStd;
-		msg_gnss_data.Heading_STD = data->HeadingGNSSStd;
-		msg_gnss_data.Pitch_STD = data->PitchGNSSStd;
-		context->publishers[3].publish(msg_gnss_data);
+		msg_gnss_data.gnss_info_1 = data->GNSSInfo1;
+		msg_gnss_data.gnss_info_2 = data->GNSSInfo2;
+		msg_gnss_data.number_sat = data->SVsol;
+		msg_gnss_data.gnss_velocity_latency = data->GNSSVelLatency;
+		msg_gnss_data.gnss_angles_position_type = data->AnglesType;
+		msg_gnss_data.gnss_heading = data->Heading_GNSS;
+		msg_gnss_data.gnss_pitch = data->Pitch_GNSS;
+		msg_gnss_data.gnss_gdop = data->GDOP;
+		msg_gnss_data.gnss_pdop = data->PDOP;
+		msg_gnss_data.gnss_hdop = data->HDOP;
+		msg_gnss_data.gnss_vdop = data->VDOP;
+		msg_gnss_data.gnss_tdop = data->TDOP;
+		msg_gnss_data.new_gnss_flags = data->NewGPS;
+		msg_gnss_data.diff_age = data->DiffAge;
+		msg_gnss_data.pos_std.x = data->LatGNSSStd;
+		msg_gnss_data.pos_std.y = data->LonGNSSStd;
+		msg_gnss_data.pos_std.z = data->AltGNSSStd;
+		msg_gnss_data.heading_std = data->HeadingGNSSStd;
+		msg_gnss_data.pitch_std = data->PitchGNSSStd;
+		context->publishers3->publish(msg_gnss_data);
 	}
 
-	if (context->publishers[4].getNumSubscribers() > 0)
+	if (context->publishers4->get_subscription_count() > 0)
 	{
-		msg_marine_data.header.seq = seq;
 		msg_marine_data.header.stamp = timestamp;
 		msg_marine_data.header.frame_id = context->imu_frame_id;
-		msg_marine_data.Heave = data->Heave;
-		msg_marine_data.Surge = data->Surge;
-		msg_marine_data.Sway = data->Sway;
-		msg_marine_data.Heave_velocity = data->Heave_velocity;
-		msg_marine_data.Surge_velocity = data->Surge_velocity;
-		msg_marine_data.Sway_velocity = data->Sway_velocity;
-		msg_marine_data.Significant_wave_height = data->significant_wave_height;
-		context->publishers[4].publish(msg_marine_data);
+		msg_marine_data.heave = data->Heave;
+		msg_marine_data.surge = data->Surge;
+		msg_marine_data.sway = data->Sway;
+		msg_marine_data.heave_velocity = data->Heave_velocity;
+		msg_marine_data.surge_velocity = data->Surge_velocity;
+		msg_marine_data.sway_velocity = data->Sway_velocity;
+		msg_marine_data.significant_wave_height = data->significant_wave_height;
+		context->publishers4->publish(msg_marine_data);
 	}
 }
 
 int main(int argc, char** argv)
 {
-	ros::init(argc, argv, "il_ins");
-	ros::NodeHandle n;
-	ros::NodeHandle np("~");
-	ros::Rate r(100); // 100 hz
-	std::string port;
+	rclcpp::init(argc, argv);
+	auto node = std::make_shared<il_ins>();
+	rclcpp::Rate r(100); // 100 hz
+	
+	std::string port = node->declare_parameter<std::string>("ins_url", "serial:/dev/ttyUSB0:460800");
 	IL::Driver ins;
-	int ins_output_format;
+	int ins_output_format = node->declare_parameter<int>("ins_output_format", 0x52);
 	std::string imu_frame_id;
-	Context context;
 
-	//command line varibales
-
-	np.param<std::string>("ins_url", port, "serial:/dev/ttyUSB0:460800");
-	np.param<int>("ins_output_format", ins_output_format, 0x52);
-
-	//Initializing Publishers
-	context.publishers[0] = np.advertise<inertiallabs_msgs::sensor_data>("/Inertial_Labs/sensor_data", 1);
-	context.publishers[1] = np.advertise<inertiallabs_msgs::ins_data>("/Inertial_Labs/ins_data", 1);
-	context.publishers[2] = np.advertise<inertiallabs_msgs::gps_data>("/Inertial_Labs/gps_data", 1);
-	context.publishers[3] = np.advertise<inertiallabs_msgs::gnss_data>("/Inertial_Labs/gnss_data", 1);
-	context.publishers[4] = np.advertise<inertiallabs_msgs::marine_data>("/Inertial_Labs/marine_data", 1);
-
-
-	ROS_INFO("connecting to INS at URL %s\n",port.c_str());
+	RCLCPP_INFO(node->get_logger(),"connecting to INS at URL %s\n",port.c_str());
 
 	auto il_err = ins.connect(port.c_str());
 	if (il_err != 0)
 	{
-		ROS_FATAL("Could not connect to the INS on this URL %s\n",
+		RCLCPP_FATAL(node->get_logger(),"Could not connect to the INS on this URL %s\n",
 				  port.c_str()
 		);
 		exit(EXIT_FAILURE);
@@ -186,19 +172,21 @@ int main(int argc, char** argv)
 	auto devInfo = ins.getDeviceInfo();
 	auto devParams = ins.getDeviceParams();
 	std::string SN(reinterpret_cast<const char *>(devInfo.IDN), 8);
-	ROS_INFO("Found INS S/N %s\n", SN.c_str());
-	context.imu_frame_id = SN;
+	RCLCPP_INFO(node->get_logger(),"Found INS S/N %s\n", SN.c_str());
+	node->imu_frame_id = SN;
 	il_err = ins.start(ins_output_format);
 	if (il_err != 0)
 	{
-		ROS_FATAL("Could not start the INS: %i\n", il_err);
+		RCLCPP_FATAL(node->get_logger(),"Could not start the INS: %i\n", il_err);
 		ins.disconnect();
 		exit(EXIT_FAILURE);
 	}
-	ins.setCallback(&publish_device, &context);
-	ROS_INFO("publishing at %d Hz\n", devParams.dataRate);
-	ROS_INFO("rostopic echo the topics to see the data");
-	ros::spin();
+
+	ins.setCallback(&publish_device, node.get());
+	RCLCPP_INFO(node->get_logger(),"publishing at %d Hz\n", devParams.dataRate);
+	RCLCPP_INFO(node->get_logger(),"rostopic echo the topics to see the data");
+	rclcpp::spin(node);
+	
 	std::cout << "Stopping INS... " << std::flush;
 	ins.stop();
 	std::cout << "Disconnecting... " << std::flush;
