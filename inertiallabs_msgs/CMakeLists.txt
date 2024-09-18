@@ -30,8 +30,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 
 # 安装步骤
-install(DIRECTORY include/
-  DESTINATION include
+install(DIRECTORY 
+  DESTINATION include/
 )
 
 if(BUILD_TESTING)
