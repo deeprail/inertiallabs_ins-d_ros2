@@ -14,6 +14,8 @@
 #include "inertiallabs_msgs/msg/gps_data.hpp"
 #include "inertiallabs_msgs/msg/gnss_data.hpp"
 #include "inertiallabs_msgs/msg/marine_data.hpp"
+// heaher file for imu raw msgs
+#include "sensor_msgs/msg/imu.hpp"
 
 #include "ilins.h"
 
@@ -24,6 +26,7 @@ il_ins::il_ins(): Node("il_ins"){
     publishers3 = this->create_publisher<inertiallabs_msgs::msg::GnssData>("/Inertial_Labs/gnss_data",1);
     publishers4 = this->create_publisher<inertiallabs_msgs::msg::MarineData>("/Inertial_Labs/marine_data",1);
     // publishers6 = this->create_publisher<TODO>("/imu_raw",1)
+	publishers5 = this->create_publisher<sensor_msgs::msg::Imu>("/imu_raw",1);
 }
 il_ins::~il_ins(){}
 
@@ -33,11 +36,15 @@ void publish_device(IL::INSDataStruct *data, il_ins* contextPtr)
 	static int seq=0;
 	seq++;
 
+	double g = 9.80655;
+	double deg_to_rad = 0.0174533;
+
 	inertiallabs_msgs::msg::SensorData_<std::allocator<void>> msg_sensor_data;
 	inertiallabs_msgs::msg::InsData_<std::allocator<void>> msg_ins_data;
 	inertiallabs_msgs::msg::GpsData_<std::allocator<void>> msg_gps_data;
 	inertiallabs_msgs::msg::GnssData_<std::allocator<void>> msg_gnss_data;
 	inertiallabs_msgs::msg::MarineData_<std::allocator<void>> msg_marine_data;
+	sensor_msgs::msg::Imu_<std::allocator<void>> msg_imu;
 
 	rclcpp::Time timestamp = context->now();
 
@@ -142,6 +149,38 @@ void publish_device(IL::INSDataStruct *data, il_ins* contextPtr)
 		msg_marine_data.significant_wave_height = data->significant_wave_height;
 		context->publishers4->publish(msg_marine_data);
 	}
+
+	if (context->publishers5->get_subscription_count() > 0){
+
+		msg_imu.header.stamp = timestamp;
+		msg_imu.header.frame_id = "inertiallabs_imu";
+
+		double roll = data->Roll;
+		double pitch = data->Pitch;
+		double yaw = data->Heading;
+
+		double cy = cos(yaw * 0.5);
+		double sy = sin(yaw * 0.5);
+		double cp = cos(pitch * 0.5);
+		double sp = sin(pitch * 0.5);
+		double cr = cos(roll * 0.5);
+		double sr = sin(roll * 0.5);
+
+		msg_imu.orientation.w = cr * cp * cy + sr * sp * sy;
+		msg_imu.orientation.x = sr * cp * cy - cr * sp * sy;
+		msg_imu.orientation.y = cr * sp * cy + sr * cp * sy;
+		msg_imu.orientation.z = cr * cp * sy - sr * sp * cy;
+
+		msg_imu.linear_acceleration.x = data->Acc[0] * g;
+		msg_imu.linear_acceleration.y = data->Acc[1] * g;
+		msg_imu.linear_acceleration.z = data->Acc[2] * g;
+
+		msg_imu.angular_velocity.x = data->Gyro[0] * deg_to_rad;
+		msg_imu.angular_velocity.y = data->Gyro[1] * deg_to_rad;
+		msg_imu.angular_velocity.z = data->Gyro[2] * deg_to_rad;
+
+		context->publishers5->publish(msg_imu);
+	}
 }
 
 int main(int argc, char** argv)
@@ -174,6 +213,7 @@ int main(int argc, char** argv)
 	auto devParams = ins.getDeviceParams();
 	std::string SN(reinterpret_cast<const char *>(devInfo.IDN), 8);
 	RCLCPP_INFO(node->get_logger(),"Found INS S/N %s\n", SN.c_str());
+	RCLCPP_INFO(node->get_logger(),"imu frame id is  %s\n", SN.c_str());
 	node->imu_frame_id = SN;
 	il_err = ins.start(ins_output_format);
 	if (il_err != 0)
@@ -185,7 +225,7 @@ int main(int argc, char** argv)
 
 	ins.setCallback(&publish_device, node.get());
 	RCLCPP_INFO(node->get_logger(),"publishing at %d Hz\n", devParams.dataRate);
-	RCLCPP_INFO(node->get_logger(),"rostopic echo the topics to see the data");
+	RCLCPP_INFO(node->get_logger(),"ros2 topic echo the topics to see the data");
 	rclcpp::spin(node);
 	
 	std::cout << "Stopping INS... " << std::flush;
