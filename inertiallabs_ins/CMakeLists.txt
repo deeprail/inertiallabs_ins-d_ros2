@@ -11,6 +11,7 @@ find_package(rclcpp REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(inertiallabs_msgs REQUIRED) 
+find_package(sensor_msgs REQUIRED)
 
 # Specify the path to your message headers
 include_directories(
@@ -39,6 +40,7 @@ ament_target_dependencies(il_ins
   rclcpp
   tf2
   inertiallabs_msgs
+  sensor_msgs
 )
 
 # Install targets

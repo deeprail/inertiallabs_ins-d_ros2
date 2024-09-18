@@ -15,6 +15,7 @@
   <depend>rosidl_default_generators</depend>
   <depend>tf2</depend>
   <depend>inertiallabs_msgs</depend> <!-- Add dependency on your message package -->
+  <depend>sensor_msgs</depend>
 
   <!-- Dependencies for testing -->
   <test_depend>ament_lint_auto</test_depend>
