@@ -61,5 +61,19 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "python.autoComplete.extraPaths": [
+        "/home/ycao/ins_ws/install/inertiallabs_msgs/local/lib/python3.10/dist-packages",
+        "/home/ycao/unitree_ros2/cyclonedds_ws/install/unitree_go/local/lib/python3.10/dist-packages",
+        "/home/ycao/unitree_ros2/cyclonedds_ws/install/unitree_api/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ycao/ins_ws/install/inertiallabs_msgs/local/lib/python3.10/dist-packages",
+        "/home/ycao/unitree_ros2/cyclonedds_ws/install/unitree_go/local/lib/python3.10/dist-packages",
+        "/home/ycao/unitree_ros2/cyclonedds_ws/install/unitree_api/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
 }
