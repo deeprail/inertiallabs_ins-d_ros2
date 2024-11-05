@@ -189,7 +189,7 @@ int main(int argc, char** argv)
 	auto node = std::make_shared<il_ins>();
 	rclcpp::Rate r(100); // 100 hz
 	
-	std::string port = node->declare_parameter<std::string>("ins_url", "serial:/dev/ttyUSB0:460800");
+	std::string port = node->declare_parameter<std::string>("ins_url", "serial:/dev/ttyUSB0");
 	IL::Driver ins;
 	int ins_output_format = node->declare_parameter<int>("ins_output_format", 0x52);
 	std::string imu_frame_id;

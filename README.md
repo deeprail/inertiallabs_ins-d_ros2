@@ -38,3 +38,8 @@ To change port, please modifier the source code
 # in il_ins.cpp
 std::string port = node->declare_parameter<std::string>("ins_url", "serial:/dev/ttyUSB0:460800");
 ```
+# Visualization examples
+Please install imu plugin.
+`sudo apt install ros-humble-rviz-imu-plugin`
+see folder `.doc`
+![INS-D](img_v3_02gb_477e2b30-8244-4a2d-9370-f02b6b15a20g.jpg)
